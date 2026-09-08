@@ -7,6 +7,6 @@ export const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-09
 
 export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 
-export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "TODO_SET_AFTER_SANITY_PROJECT_CREATE";
+export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "enm8711a";
 
 export const isSanityConfigured = projectId.length > 0;
