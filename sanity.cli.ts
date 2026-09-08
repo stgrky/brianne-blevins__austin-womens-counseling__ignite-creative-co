@@ -8,5 +8,5 @@ export default defineCliConfig({
     dataset,
   },
   studioHost: "austin-womens-counseling",
-  deployment: { autoUpdates: true },
+  deployment: { autoUpdates: true, appId: "h2r44iaztsn7ve6nasguqo05" },
 });
