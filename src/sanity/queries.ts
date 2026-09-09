@@ -64,7 +64,15 @@ export const aboutPageQuery = groq`*[_type == "aboutPage"][0]{
   intro,
   body,
   portrait,
-  credentials
+  credentials,
+  associatesHeading,
+  associatesIntro,
+  associates[]{
+    name,
+    credentials,
+    photo,
+    bio
+  }
 }`;
 
 export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
@@ -84,7 +92,13 @@ export const contactPageQuery = groq`*[_type == "contactPage"][0]{
   phone,
   addressLine,
   schedulingUrl,
-  hours
+  hours,
+  formEmbedUrl,
+  faqHeading,
+  faqs[]{
+    question,
+    answer
+  }
 }`;
 
 export const allPostsQuery = groq`*[_type == "post" && defined(slug.current)] | order(publishedAt desc){

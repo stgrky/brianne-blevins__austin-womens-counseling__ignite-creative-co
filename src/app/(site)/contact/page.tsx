@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
+import { ContactFormEmbed } from "@/components/ContactFormEmbed";
 import { Reveal } from "@/components/motion/Reveal";
 import { PracticeScheduler } from "@/components/PracticeScheduler";
+import { FaqSection } from "@/components/site/FaqSection";
 import { defaultContactPage } from "@/lib/site-defaults";
 import { safeFetch } from "@/sanity/client";
 import { contactPageQuery } from "@/sanity/queries";
@@ -177,6 +179,34 @@ export default async function ContactPageRoute() {
           </div>
         </Container>
       </section>
+
+      {/* ── CONTACT FORM ── the practice's own existing form, embedded ── */}
+      {contact.formEmbedUrl ? (
+        <section className="bg-[var(--color-surface)] py-16 md:py-24">
+          <Container>
+            <div className="mx-auto max-w-2xl">
+              <Reveal>
+                <p className="text-center text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--color-accent-strong)]">
+                  Or send a message
+                </p>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <h2 className="mt-4 text-center font-serif text-3xl leading-[1.15] text-[var(--color-foreground)] md:text-[2.2rem]">
+                  Write when you&apos;re ready.
+                </h2>
+              </Reveal>
+              <Reveal delay={0.16}>
+                <div className="mt-10">
+                  <ContactFormEmbed url={contact.formEmbedUrl} />
+                </div>
+              </Reveal>
+            </div>
+          </Container>
+        </section>
+      ) : null}
+
+      {/* ── FAQ ── bundled with SEO Setup, or scoped into revisions by CSA ── */}
+      <FaqSection heading={contact.faqHeading} faqs={contact.faqs} />
 
       {/* ── SOFT CROSSLINK ── */}
       <section className="bg-[var(--color-surface)] py-16 md:py-24">

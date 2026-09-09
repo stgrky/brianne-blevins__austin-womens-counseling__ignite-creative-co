@@ -90,12 +90,22 @@ export interface Announcement {
   endDate?: string;
 }
 
+export interface Associate {
+  name?: string;
+  credentials?: string;
+  photo?: SanityImageWithAlt;
+  bio?: string;
+}
+
 export interface AboutPage {
   heading?: string;
   intro?: string;
   body?: PortableTextBlock[];
   portrait?: SanityImageWithAlt;
   credentials?: string[];
+  associatesHeading?: string;
+  associatesIntro?: string;
+  associates?: Associate[];
 }
 
 export interface ServiceItem {
@@ -110,6 +120,11 @@ export interface ServicesPage {
   services?: ServiceItem[];
 }
 
+export interface FaqItem {
+  question?: string;
+  answer?: string;
+}
+
 export interface ContactPage {
   heading?: string;
   intro?: string;
@@ -118,6 +133,9 @@ export interface ContactPage {
   addressLine?: string;
   schedulingUrl?: string;
   hours?: { day?: string; time?: string }[];
+  formEmbedUrl?: string;
+  faqHeading?: string;
+  faqs?: FaqItem[];
 }
 
 export interface AuthorRef {

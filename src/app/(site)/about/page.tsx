@@ -5,6 +5,7 @@ import { Container } from "@/components/Container";
 import { Reveal } from "@/components/motion/Reveal";
 import { PortableTextRenderer } from "@/components/PortableTextRenderer";
 import { AboutSticky } from "@/components/site/AboutSticky";
+import { AssociatesGrid } from "@/components/site/AssociatesGrid";
 import { defaultAboutPage } from "@/lib/site-defaults";
 import { safeFetch } from "@/sanity/client";
 import { aboutPageQuery } from "@/sanity/queries";
@@ -87,6 +88,9 @@ export default async function AboutPageRoute() {
           </Container>
         </section>
       ) : null}
+
+      {/* ── ASSOCIATES ── client-managed; hides itself when empty ── */}
+      <AssociatesGrid about={about} />
 
       {/* ── CLOSING CTA ── */}
       <section className="bg-[var(--color-surface)] py-20 md:py-28">
