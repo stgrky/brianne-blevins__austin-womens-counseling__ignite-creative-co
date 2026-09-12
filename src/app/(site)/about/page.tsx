@@ -4,9 +4,9 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/motion/Reveal";
 import { PortableTextRenderer } from "@/components/PortableTextRenderer";
-import { SanityImg } from "@/components/SanityImg";
 import { AboutSticky } from "@/components/site/AboutSticky";
 import { AssociatesGrid } from "@/components/site/AssociatesGrid";
+import { CredentialBadges } from "@/components/site/CredentialBadges";
 import { defaultAboutPage } from "@/lib/site-defaults";
 import { safeFetch } from "@/sanity/client";
 import { aboutPageQuery } from "@/sanity/queries";
@@ -57,8 +57,8 @@ export default async function AboutPageRoute() {
         </section>
       ) : null}
 
-      {/* ── CREDENTIALS + BADGES ── */}
-      {about.credentials?.length || about.credentialBadges?.length ? (
+      {/* ── CREDENTIALS ── */}
+      {about.credentials?.length ? (
         <section className="bg-[var(--color-background)] pb-20 md:pb-28">
           <Container>
             <Reveal>
@@ -69,21 +69,6 @@ export default async function AboutPageRoute() {
                 <p className="text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--color-accent-strong)]">
                   Credentials &amp; training
                 </p>
-                {about.credentialBadges?.length ? (
-                  <div className="mt-6 flex flex-wrap items-center gap-5">
-                    {about.credentialBadges.map((badge, i) => (
-                      <SanityImg
-                        key={badge.asset?._ref ?? i}
-                        image={badge}
-                        alt={badge.alt ?? "Credential badge"}
-                        width={240}
-                        height={240}
-                        className="h-20 w-auto object-contain"
-                        sizes="80px"
-                      />
-                    ))}
-                  </div>
-                ) : null}
                 <ul className="mt-6 grid gap-3 text-base text-[var(--color-foreground)] sm:grid-cols-2">
                   {(about.credentials ?? []).map((cred) => (
                     <li
@@ -104,6 +89,9 @@ export default async function AboutPageRoute() {
           </Container>
         </section>
       ) : null}
+
+      {/* ── CREDENTIAL BADGES ── centred on their own, below the card ── */}
+      <CredentialBadges badges={about.credentialBadges} />
 
       {/* ── ASSOCIATES ── client-managed; hides itself when empty ── */}
       <AssociatesGrid about={about} />
