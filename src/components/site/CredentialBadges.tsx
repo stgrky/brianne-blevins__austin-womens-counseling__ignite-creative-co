@@ -19,10 +19,10 @@ export function CredentialBadges({
 }) {
   if (!badges?.length) return null;
 
+  // No vertical padding of its own: the credentials card above and the next
+  // section below both carry their own spacing, and doubling it up strands
+  // the badge in the middle of a large empty band.
   return (
-    {/* No vertical padding of its own: the credentials card above and the
-        next section below both carry their own spacing, and doubling it up
-        strands the badge in the middle of a large empty band. */}
     <section className="bg-[var(--color-background)]">
       <Container>
         <Reveal>
