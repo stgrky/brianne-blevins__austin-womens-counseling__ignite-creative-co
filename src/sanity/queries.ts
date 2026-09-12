@@ -65,6 +65,7 @@ export const aboutPageQuery = groq`*[_type == "aboutPage"][0]{
   body,
   portrait,
   credentials,
+  credentialBadges,
   associatesHeading,
   associatesIntro,
   associates[]{

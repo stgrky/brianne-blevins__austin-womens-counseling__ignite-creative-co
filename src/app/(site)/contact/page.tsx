@@ -22,6 +22,11 @@ async function getContact() {
 export default async function ContactPageRoute() {
   const contact = await getContact();
   const hasScheduler = Boolean(contact.schedulingUrl);
+  // Some practices publish no email/phone/address and route everything through
+  // their own form — the methods section would otherwise render an empty list.
+  const hasDirectMethods = Boolean(
+    contact.email || contact.phone || contact.addressLine || contact.hours?.length,
+  );
 
   return (
     <>
@@ -70,6 +75,7 @@ export default async function ContactPageRoute() {
       ) : null}
 
       {/* ── CONTACT METHODS ── */}
+      {hasDirectMethods ? (
       <section className="bg-[var(--color-background)] py-20 md:py-28">
         <Container>
           <div className="grid gap-10 md:grid-cols-12 md:gap-12">
@@ -134,7 +140,7 @@ export default async function ContactPageRoute() {
                 ) : null}
               </dl>
 
-              {!hasScheduler ? (
+              {!hasScheduler && contact.email ? (
                 <Reveal delay={0.36}>
                   <p className="mt-10 text-sm italic text-[var(--color-muted)]">
                     I read every email personally and reply within two
@@ -179,6 +185,7 @@ export default async function ContactPageRoute() {
           </div>
         </Container>
       </section>
+      ) : null}
 
       {/* ── CONTACT FORM ── the practice's own existing form, embedded ── */}
       {contact.formEmbedUrl ? (

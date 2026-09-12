@@ -103,6 +103,7 @@ export interface AboutPage {
   body?: PortableTextBlock[];
   portrait?: SanityImageWithAlt;
   credentials?: string[];
+  credentialBadges?: SanityImageWithAlt[];
   associatesHeading?: string;
   associatesIntro?: string;
   associates?: Associate[];
