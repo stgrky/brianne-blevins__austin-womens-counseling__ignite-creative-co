@@ -19,7 +19,10 @@ export function ModalityDrift({ modalities }: { modalities: string[] }) {
       <Marquee autoFill pauseOnHover speed={22} gradient={false}>
         {modalities.map((modality) => (
           <span key={modality} className="flex items-center">
-            <span className="font-serif text-xl leading-none text-[var(--color-foreground)]/70 md:text-2xl">
+            {/* leading-normal, not leading-none: a line box exactly the font
+                size tall pushes descenders (g, p, y) outside it, and the
+                marquee's overflow:hidden then shears them off. */}
+            <span className="font-serif text-xl leading-normal text-[var(--color-foreground)]/70 md:text-2xl">
               {modality}
             </span>
             <span
