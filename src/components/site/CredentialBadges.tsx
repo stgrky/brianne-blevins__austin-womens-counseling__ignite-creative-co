@@ -20,7 +20,10 @@ export function CredentialBadges({
   if (!badges?.length) return null;
 
   return (
-    <section className="bg-[var(--color-background)] pb-20 md:pb-28">
+    {/* No vertical padding of its own: the credentials card above and the
+        next section below both carry their own spacing, and doubling it up
+        strands the badge in the middle of a large empty band. */}
+    <section className="bg-[var(--color-background)]">
       <Container>
         <Reveal>
           <div className="flex flex-wrap items-center justify-center gap-12">

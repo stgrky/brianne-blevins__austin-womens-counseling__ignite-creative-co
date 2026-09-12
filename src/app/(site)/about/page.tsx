@@ -59,7 +59,7 @@ export default async function AboutPageRoute() {
 
       {/* ── CREDENTIALS ── */}
       {about.credentials?.length ? (
-        <section className="bg-[var(--color-background)] pb-20 md:pb-28">
+        <section className="bg-[var(--color-background)] pb-10 md:pb-12">
           <Container>
             <Reveal>
               <div
