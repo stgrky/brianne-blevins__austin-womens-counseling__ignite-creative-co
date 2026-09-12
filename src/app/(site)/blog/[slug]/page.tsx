@@ -12,6 +12,7 @@ import { SanityImg } from "@/components/SanityImg";
 import { demoPostBySlug, demoSimilar } from "@/lib/demo-posts";
 import { formatDateLong } from "@/lib/format";
 import { safeFetch } from "@/sanity/client";
+import { isSanityConfigured } from "@/sanity/env";
 import { postBySlugQuery, similarPostsQuery } from "@/sanity/queries";
 import type { PostDetail, RecentPost } from "@/sanity/types";
 
@@ -21,20 +22,24 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+// The demo posts exist so the template renders with no Sanity project at all.
+// Once a real project is connected, "no such post" must 404 — otherwise every
+// deleted demo post stays live at its old URL, published under the client's
+// own practice name. Never fall back to demo content on a configured site.
 async function getPost(slug: string) {
   return safeFetch<PostDetail | null>(
     postBySlugQuery,
     { slug },
-    demoPostBySlug(slug)
+    isSanityConfigured ? null : demoPostBySlug(slug)
   );
 }
 
 async function getSimilar(slug: string, categoryIds: string[]) {
-  if (!categoryIds.length) return demoSimilar(slug);
+  if (!categoryIds.length) return isSanityConfigured ? [] : demoSimilar(slug);
   return safeFetch<RecentPost[]>(
     similarPostsQuery,
     { slug, categoryIds },
-    demoSimilar(slug)
+    isSanityConfigured ? [] : demoSimilar(slug)
   );
 }
 

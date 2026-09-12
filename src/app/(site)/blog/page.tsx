@@ -10,6 +10,7 @@ import { SanityImg } from "@/components/SanityImg";
 import { demoBlogIndex } from "@/lib/demo-posts";
 import { formatDateLong } from "@/lib/format";
 import { safeFetch } from "@/sanity/client";
+import { isSanityConfigured } from "@/sanity/env";
 import { blogIndexQuery } from "@/sanity/queries";
 import type { BlogIndexResult } from "@/sanity/types";
 
@@ -41,7 +42,7 @@ export default async function BlogIndexRoute({ searchParams }: BlogPageProps) {
   const { posts, total } = await safeFetch<BlogIndexResult>(
     blogIndexQuery,
     { start, end },
-    demoBlogIndex(start, end)
+    isSanityConfigured ? { posts: [], total: 0 } : demoBlogIndex(start, end)
   );
 
   const totalPages = Math.max(1, Math.ceil(total / POSTS_PER_PAGE));
@@ -59,19 +60,13 @@ export default async function BlogIndexRoute({ searchParams }: BlogPageProps) {
         <Container className="py-20 text-center md:py-24">
           <Reveal>
             <p className="text-[12px] font-medium uppercase tracking-[0.3em] text-[var(--color-accent-strong)]">
-              Gentle reads
+              Blog
             </p>
           </Reveal>
           <Reveal delay={0.08}>
             <h1 className="mt-6 font-serif text-4xl leading-[1.15] tracking-tight text-[var(--color-foreground)] md:text-[3.2rem]">
-              Small essays for tender days.
+              Notes &amp; resources.
             </h1>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <p className="mx-auto mt-6 max-w-xl text-balance text-lg leading-[1.9] text-[var(--color-muted)]">
-              On nervous systems, healing, and being a body in the world. No
-              urgency here — these will wait for you.
-            </p>
           </Reveal>
         </Container>
       </section>
