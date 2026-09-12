@@ -11,6 +11,14 @@ interface SanityImgProps {
   className?: string;
   priority?: boolean;
   sizes?: string;
+  /**
+   * How the source is fitted to width x height. "crop" (the default) fills the
+   * box exactly and trims the overflow -- right for portraits, where the frame
+   * matters more than the edges. "max" scales the image down to fit inside the
+   * box and never trims, which is what logos and badges need: their aspect
+   * ratios vary, and any crop eats the artwork.
+   */
+  fit?: "crop" | "max";
 }
 
 export function SanityImg({
@@ -21,6 +29,7 @@ export function SanityImg({
   className,
   priority,
   sizes,
+  fit = "crop",
 }: SanityImgProps) {
   // Demo fallback: render a plain URL directly (no Sanity backend needed).
   if (image?.demoUrl) {
@@ -49,7 +58,7 @@ export function SanityImg({
       </div>
     );
   }
-  const src = builder.width(width).height(height).fit("crop").auto("format").url();
+  const src = builder.width(width).height(height).fit(fit).auto("format").url();
   return (
     <Image
       src={src}

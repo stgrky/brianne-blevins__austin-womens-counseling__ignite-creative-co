@@ -32,10 +32,11 @@ export function CredentialBadges({
                 key={badge.asset?._ref ?? i}
                 image={badge}
                 alt={badge.alt ?? "Credential badge"}
-                width={400}
-                height={440}
+                width={480}
+                height={480}
+                fit="max"
                 className="h-28 w-auto object-contain md:h-32"
-                sizes="128px"
+                sizes="240px"
               />
             ))}
           </div>
