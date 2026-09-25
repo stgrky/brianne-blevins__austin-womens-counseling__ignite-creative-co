@@ -30,7 +30,10 @@ export function FaqSection({
   eyebrow = "Before you reach out",
 }: Props) {
   const items = (faqs ?? []).filter((faq) => faq.question && faq.answer);
-  if (!heading || items.length === 0) return null;
+  // The questions decide whether this renders, not the heading: on its own page
+  // the heading is the <h1> above, so the section is passed none. Requiring one
+  // silently emptied that page.
+  if (items.length === 0) return null;
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -50,20 +53,26 @@ export function FaqSection({
       />
       <Container>
         <div className="mx-auto max-w-3xl">
-          <div className="text-center">
-            <Reveal>
-              <p className="text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--color-accent-strong)]">
-                {eyebrow}
-              </p>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <h2 className="mt-4 font-serif text-3xl leading-[1.2] text-[var(--color-foreground)] md:text-[2.4rem]">
-                {heading}
-              </h2>
-            </Reveal>
-          </div>
+          {eyebrow || heading ? (
+            <div className="text-center">
+              {eyebrow ? (
+                <Reveal>
+                  <p className="text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--color-accent-strong)]">
+                    {eyebrow}
+                  </p>
+                </Reveal>
+              ) : null}
+              {heading ? (
+                <Reveal delay={0.08}>
+                  <h2 className="mt-4 font-serif text-3xl leading-[1.2] text-[var(--color-foreground)] md:text-[2.4rem]">
+                    {heading}
+                  </h2>
+                </Reveal>
+              ) : null}
+            </div>
+          ) : null}
 
-          <div className="mt-12 space-y-4">
+          <div className="space-y-4 [&:not(:first-child)]:mt-12">
             {items.map((faq, i) => (
               <Reveal key={faq.question ?? i} delay={0.06 * i}>
                 <details className="group overflow-hidden rounded-[2rem] border border-[var(--color-subtle)]/50 bg-[var(--color-background)] px-7 py-5 shadow-[var(--shadow-card)] transition-colors duration-700 hover:border-[var(--color-accent)]/50 [&_summary::-webkit-details-marker]:hidden">

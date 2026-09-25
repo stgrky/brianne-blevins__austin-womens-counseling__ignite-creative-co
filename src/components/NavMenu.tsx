@@ -19,8 +19,18 @@ import type { NavItem } from "@/sanity/types";
  * expanded as an indented list: a short menu that's all visible beats a menu
  * that has to be operated.
  */
-export function NavMenu({ items }: { items: NavItem[] }) {
+export function NavMenu({
+  items,
+  variant,
+}: {
+  items: NavItem[];
+  /** Which layout to draw. The header places these in two different rows, so
+   *  the component renders one at a time rather than both — rendering both
+   *  from two call sites stacked two menus on top of each other. */
+  variant: "desktop" | "mobile";
+}) {
   const [openLabel, setOpenLabel] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -31,6 +41,7 @@ export function NavMenu({ items }: { items: NavItem[] }) {
   if (lastPath !== pathname) {
     setLastPath(pathname);
     setOpenLabel(null);
+    setMobileOpen(false);
   }
 
   useEffect(() => {
@@ -52,9 +63,8 @@ export function NavMenu({ items }: { items: NavItem[] }) {
   const isCurrent = (href?: string) =>
     Boolean(href) && (pathname === href || (href !== "/" && pathname.startsWith(`${href}/`)));
 
-  return (
-    <>
-      {/* Desktop */}
+  if (variant === "desktop") {
+    return (
       <div ref={navRef} className="hidden items-center gap-6 text-sm md:flex">
         {items.map((item) => {
           const children = item.children ?? [];
@@ -139,15 +149,36 @@ export function NavMenu({ items }: { items: NavItem[] }) {
           );
         })}
       </div>
+    );
+  }
 
-      {/* Mobile: everything visible, children indented under their parent */}
-      <nav className="w-full md:hidden">
-        <ul className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm">
+  // Mobile and tablet: a single toggle rather than a wrapped pile of links.
+  // Nine items across two levels cannot lay out flat under 768px without
+  // spilling into three ragged rows, which is what shipped first.
+  return (
+    <nav className="w-full md:hidden">
+      <button
+        type="button"
+        onClick={() => setMobileOpen((open) => !open)}
+        aria-expanded={mobileOpen}
+        aria-controls="mobile-menu"
+        className="inline-flex items-center gap-2 rounded-full border border-[var(--color-subtle)] px-4 py-1.5 text-sm text-[var(--color-foreground)] transition hover:border-[var(--color-accent)]"
+      >
+        <span aria-hidden className="flex flex-col gap-[3px]">
+          <span className="block h-px w-4 bg-current" />
+          <span className="block h-px w-4 bg-current" />
+          <span className="block h-px w-4 bg-current" />
+        </span>
+        {mobileOpen ? "Close" : "Menu"}
+      </button>
+
+      {mobileOpen ? (
+        <ul id="mobile-menu" className="mt-3 space-y-1 border-t border-[var(--color-subtle)] pt-3">
           {items.map((item) => (
-            <li key={item.label} className="flex flex-wrap items-center gap-x-3">
+            <li key={item.label}>
               <Link
-                href={item.href ?? (item.children?.[0]?.href ?? "/")}
-                className={`transition ${
+                href={item.href ?? item.children?.[0]?.href ?? "/"}
+                className={`block py-1.5 text-[15px] transition ${
                   isCurrent(item.href)
                     ? "text-[var(--color-foreground)]"
                     : "text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
@@ -155,23 +186,28 @@ export function NavMenu({ items }: { items: NavItem[] }) {
               >
                 {item.label}
               </Link>
-              {(item.children ?? []).map((child) => (
-                <Link
-                  key={child.href}
-                  href={child.href ?? "/"}
-                  className={`text-[13px] transition ${
-                    isCurrent(child.href)
-                      ? "text-[var(--color-accent-strong)]"
-                      : "text-[var(--color-muted)]/80 hover:text-[var(--color-foreground)]"
-                  }`}
-                >
-                  · {child.label}
-                </Link>
-              ))}
+              {(item.children ?? []).length > 0 ? (
+                <ul className="mb-1 ml-4 border-l border-[var(--color-subtle)] pl-4">
+                  {(item.children ?? []).map((child) => (
+                    <li key={child.href}>
+                      <Link
+                        href={child.href ?? "/"}
+                        className={`block py-1.5 text-sm transition ${
+                          isCurrent(child.href)
+                            ? "text-[var(--color-accent-strong)]"
+                            : "text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
+                        }`}
+                      >
+                        {child.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </li>
           ))}
         </ul>
-      </nav>
-    </>
+      ) : null}
+    </nav>
   );
 }

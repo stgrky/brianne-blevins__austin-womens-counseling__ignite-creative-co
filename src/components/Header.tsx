@@ -67,7 +67,7 @@ export function Header({ practiceName, cta, navItems, logo }: Props) {
             </span>
           )}
         </Link>
-        <NavMenu items={items} />
+        <NavMenu items={items} variant="desktop" />
         <Link
           href={cta?.href ?? "/contact"}
           className="hidden rounded-full bg-[var(--color-accent)] px-4 py-2 text-sm text-white transition hover:bg-[var(--color-accent-strong)] md:inline-flex"
@@ -76,7 +76,7 @@ export function Header({ practiceName, cta, navItems, logo }: Props) {
         </Link>
       </Container>
       <Container className="pb-3 md:hidden">
-        <NavMenu items={items} />
+        <NavMenu items={items} variant="mobile" />
       </Container>
     </header>
   );
