@@ -22,8 +22,11 @@ import type { NavItem } from "@/sanity/types";
 export function NavMenu({
   items,
   variant,
+  cta,
 }: {
   items: NavItem[];
+  /** Shown as a full-width button at the bottom of the open mobile panel. */
+  cta?: { label?: string; href?: string };
   /** Which layout to draw. The header places these in two different rows, so
    *  the component renders one at a time rather than both — rendering both
    *  from two call sites stacked two menus on top of each other. */
@@ -152,62 +155,91 @@ export function NavMenu({
     );
   }
 
-  // Mobile and tablet: a single toggle rather than a wrapped pile of links.
-  // Nine items across two levels cannot lay out flat under 768px without
-  // spilling into three ragged rows, which is what shipped first.
+  // Mobile and tablet: an icon button beside the logo that drops a soft panel
+  // across the full width of the header. The first attempt was a bare list of
+  // links under the logo — legible, but it read like a sitemap rather than
+  // part of this site.
   return (
-    <nav className="w-full md:hidden">
+    <div className="md:hidden">
       <button
         type="button"
         onClick={() => setMobileOpen((open) => !open)}
         aria-expanded={mobileOpen}
         aria-controls="mobile-menu"
-        className="inline-flex items-center gap-2 rounded-full border border-[var(--color-subtle)] px-4 py-1.5 text-sm text-[var(--color-foreground)] transition hover:border-[var(--color-accent)]"
+        aria-label={mobileOpen ? "Close menu" : "Open menu"}
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-subtle)] text-[var(--color-foreground)] transition hover:border-[var(--color-accent)]"
       >
-        <span aria-hidden className="flex flex-col gap-[3px]">
-          <span className="block h-px w-4 bg-current" />
-          <span className="block h-px w-4 bg-current" />
-          <span className="block h-px w-4 bg-current" />
+        <span aria-hidden className="relative block h-3 w-4">
+          <span
+            className={`absolute left-0 block h-px w-4 bg-current transition-all duration-300 ${
+              mobileOpen ? "top-1.5 rotate-45" : "top-0"
+            }`}
+          />
+          <span
+            className={`absolute left-0 top-1.5 block h-px w-4 bg-current transition-opacity duration-200 ${
+              mobileOpen ? "opacity-0" : "opacity-100"
+            }`}
+          />
+          <span
+            className={`absolute left-0 block h-px w-4 bg-current transition-all duration-300 ${
+              mobileOpen ? "top-1.5 -rotate-45" : "top-3"
+            }`}
+          />
         </span>
-        {mobileOpen ? "Close" : "Menu"}
       </button>
 
       {mobileOpen ? (
-        <ul id="mobile-menu" className="mt-3 space-y-1 border-t border-[var(--color-subtle)] pt-3">
-          {items.map((item) => (
-            <li key={item.label}>
+        <div
+          id="mobile-menu"
+          className="absolute inset-x-0 top-full z-50 px-4 pb-4"
+        >
+          <div className="overflow-hidden rounded-[2rem] border border-[var(--color-subtle)]/60 bg-[var(--color-surface)] p-6 shadow-[var(--shadow-card)]">
+            <ul className="space-y-5">
+              {items.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href ?? item.children?.[0]?.href ?? "/"}
+                    className={`font-serif text-xl leading-tight transition ${
+                      isCurrent(item.href)
+                        ? "text-[var(--color-accent-strong)]"
+                        : "text-[var(--color-foreground)]"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                  {(item.children ?? []).length > 0 ? (
+                    <ul className="mt-2.5 space-y-2">
+                      {(item.children ?? []).map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href ?? "/"}
+                            className={`block text-[15px] transition ${
+                              isCurrent(child.href)
+                                ? "text-[var(--color-accent-strong)]"
+                                : "text-[var(--color-muted)]"
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+
+            {cta?.label ? (
               <Link
-                href={item.href ?? item.children?.[0]?.href ?? "/"}
-                className={`block py-1.5 text-[15px] transition ${
-                  isCurrent(item.href)
-                    ? "text-[var(--color-foreground)]"
-                    : "text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
-                }`}
+                href={cta.href ?? "/contact"}
+                className="mt-7 flex w-full items-center justify-center rounded-full bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-accent-strong)]"
               >
-                {item.label}
+                {cta.label}
               </Link>
-              {(item.children ?? []).length > 0 ? (
-                <ul className="mb-1 ml-4 border-l border-[var(--color-subtle)] pl-4">
-                  {(item.children ?? []).map((child) => (
-                    <li key={child.href}>
-                      <Link
-                        href={child.href ?? "/"}
-                        className={`block py-1.5 text-sm transition ${
-                          isCurrent(child.href)
-                            ? "text-[var(--color-accent-strong)]"
-                            : "text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
-                        }`}
-                      >
-                        {child.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </li>
-          ))}
-        </ul>
+            ) : null}
+          </div>
+        </div>
       ) : null}
-    </nav>
+    </div>
   );
 }

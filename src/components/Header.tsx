@@ -46,7 +46,7 @@ type Props = {
 export function Header({ practiceName, cta, navItems, logo }: Props) {
   const items = navItems?.length ? navItems : FALLBACK_NAV;
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--color-subtle)]/60 bg-[var(--color-background)]/85 backdrop-blur">
+    <header className="sticky top-0 z-40 relative border-b border-[var(--color-subtle)]/60 bg-[var(--color-background)]/85 backdrop-blur">
       <Container className="flex items-center justify-between gap-6 py-5">
         <Link
           href="/"
@@ -74,9 +74,7 @@ export function Header({ practiceName, cta, navItems, logo }: Props) {
         >
           {cta?.label ?? "Book a consult"}
         </Link>
-      </Container>
-      <Container className="pb-3 md:hidden">
-        <NavMenu items={items} variant="mobile" />
+        <NavMenu items={items} variant="mobile" cta={cta} />
       </Container>
     </header>
   );
