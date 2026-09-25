@@ -10,6 +10,7 @@ export type SanityImageWithAlt = SanityImage & {
 };
 
 export type PaletteName =
+  | "softteal"
   | "sage"
   | "navy"
   | "terracotta"
@@ -106,6 +107,8 @@ export interface AboutPage {
   credentialBadges?: SanityImageWithAlt[];
   associatesHeading?: string;
   associatesIntro?: string;
+  ratesHeading?: string;
+  ratesBody?: string;
   associates?: Associate[];
 }
 
@@ -200,3 +203,39 @@ export interface RecentPost {
 }
 
 export type SlugRef = Slug;
+
+export interface NoticesPage {
+  heading?: string;
+  intro?: string;
+  licensureHeading?: string;
+  licensureIntro?: string;
+  licensure?: {
+    state?: string;
+    credential?: string;
+    licenseNumber?: string;
+    boardName?: string;
+    verifyUrl?: string;
+  }[];
+  sections?: { title?: string; body?: string; linkLabel?: string; linkUrl?: string }[];
+}
+
+export interface SupervisionPage {
+  heading?: string;
+  intro?: string;
+  offerings?: { title?: string; body?: string; detail?: string }[];
+  superviseesHeading?: string;
+  superviseesIntro?: string;
+  supervisees?: Associate[];
+  ctaHeading?: string;
+  ctaBody?: string;
+}
+
+export interface NavItem {
+  label?: string;
+  href?: string;
+  children?: { label?: string; href?: string }[];
+}
+
+export interface Navigation {
+  items?: NavItem[];
+}

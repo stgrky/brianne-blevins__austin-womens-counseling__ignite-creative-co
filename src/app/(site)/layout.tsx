@@ -5,8 +5,8 @@ import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { StickyCta } from "@/components/site/StickyCta";
 import { defaultAnnouncement, defaultSiteSettings } from "@/lib/site-defaults";
 import { safeFetch } from "@/sanity/client";
-import { announcementQuery, siteSettingsQuery } from "@/sanity/queries";
-import type { Announcement, SiteSettings } from "@/sanity/types";
+import { announcementQuery, navigationQuery, siteSettingsQuery } from "@/sanity/queries";
+import type { Announcement, Navigation, SiteSettings } from "@/sanity/types";
 
 // Render every request fresh against Sanity so content edits in Studio
 // (publish/edit/delete) reflect on the live site immediately. The therapist
@@ -26,9 +26,12 @@ export default async function SiteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [settings, announcement] = await Promise.all([
+  const [settings, announcement, navigation] = await Promise.all([
     getSiteSettings(),
     getAnnouncement(),
+    // Null fallback on purpose: no menu document yet means the Header's own
+    // fallback menu renders, rather than an error page over a missing menu.
+    safeFetch<Navigation | null>(navigationQuery, {}, null),
   ]);
   return (
     <>
@@ -37,6 +40,7 @@ export default async function SiteLayout({
       <AnnouncementBar announcement={announcement} />
       <Header
         practiceName={settings.practiceName ?? "Therapy Practice"}
+        navItems={navigation?.items}
         logo={settings.logo}
       />
       <main className="flex-1">{children}</main>

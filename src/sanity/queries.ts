@@ -68,6 +68,8 @@ export const aboutPageQuery = groq`*[_type == "aboutPage"][0]{
   credentialBadges,
   associatesHeading,
   associatesIntro,
+  ratesHeading,
+  ratesBody,
   associates[]{
     name,
     credentials,
@@ -203,3 +205,27 @@ export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][
   }
 }`;
 
+
+export const noticesPageQuery = groq`*[_type == "noticesPage"][0]{
+  heading,
+  intro,
+  licensureHeading,
+  licensureIntro,
+  licensure[]{ state, credential, licenseNumber, boardName, verifyUrl },
+  sections[]{ title, body, linkLabel, linkUrl }
+}`;
+
+export const supervisionPageQuery = groq`*[_type == "supervisionPage"][0]{
+  heading,
+  intro,
+  offerings[]{ title, body, detail },
+  superviseesHeading,
+  superviseesIntro,
+  supervisees[]{ name, credentials, bio, photo },
+  ctaHeading,
+  ctaBody
+}`;
+
+export const navigationQuery = groq`*[_type == "navigation"][0]{
+  items[]{ label, href, children[]{ label, href } }
+}`;

@@ -48,6 +48,20 @@ export const aboutPage = defineType({
           type: "image",
           fields: [
             {
+      name: "ratesHeading",
+      title: "Rates section heading",
+      type: "string",
+      description: "Appears above your fees on the About page, linked from the menu.",
+    },
+    {
+      name: "ratesBody",
+      title: "Rates & Good Faith Estimate",
+      type: "text",
+      rows: 10,
+      description:
+        "Your session fees and your Good Faith Estimate wording. Leave blank to hide the whole section.",
+    },
+    {
               name: "alt",
               type: "string",
               title: "What the badge is",

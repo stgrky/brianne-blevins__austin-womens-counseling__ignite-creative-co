@@ -78,6 +78,21 @@
   --p-accent-strong: #5f6f9a;
   --p-accent-soft: #e8ebf4;
 }
+/* Soft teal — Brianne's brand. Sampled from austinwomenscounseling.com, whose
+ * headings are #226E93 and whose light accent is #49AAD4. Her own light value
+ * only reaches 2.6:1 against white, so the accent here is darkened to #35788C
+ * (4.98:1) — white button text stays legible while the hue stays hers. */
+[data-palette="softteal"] {
+  --p-background: #f8fafa;
+  --p-surface: #ffffff;
+  --p-foreground: #1f2a2e;
+  --p-muted: #5f6e73;
+  --p-subtle: #d9e3e7;
+  --p-accent: #35788c;
+  --p-accent-strong: #2a6072;
+  --p-accent-soft: #e8f1f4;
+}
+
 [data-palette="teal"] {
   --p-background: #f9fafb;
   --p-surface: #ffffff;

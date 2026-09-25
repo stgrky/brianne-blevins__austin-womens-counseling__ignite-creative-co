@@ -2,6 +2,8 @@ import type {
   AboutPage,
   Announcement,
   ContactPage,
+  NoticesPage,
+  SupervisionPage,
   HomePage,
   PostListItem,
   RecentPost,
@@ -190,4 +192,89 @@ export const defaultAnnouncement: Announcement = {
   enabled: false,
   message: "",
   variant: "info",
+};
+
+/**
+ * Notices — licensure, complaints, records.
+ *
+ * Verification links were each checked live on 2026-09-24: Idaho's published
+ * verification page 404s and South Carolina's lookup subdomain refuses outside
+ * requests, so both point at the board pages that do answer. Licence numbers
+ * are deliberately blank — those are hers to publish, and inventing one would
+ * be worse than omitting it.
+ */
+export const defaultNoticesPage: NoticesPage = {
+  heading: "Notices",
+  intro:
+    "Licence verification, how to raise a concern, and how to request your records. If you can't find what you need here, just ask.",
+  licensureHeading: "Licensure & verification",
+  licensureIntro:
+    "Telehealth is provided only in states where I hold a current licence. Each board below publishes a public lookup, so you can confirm any licence yourself.",
+  licensure: [
+    {
+      state: "Texas",
+      credential: "LMFT-S, LPC-S",
+      boardName: "Texas Behavioral Health Executive Council",
+      verifyUrl: "https://bhec.texas.gov/tbhec/verify-a-license/",
+    },
+    {
+      state: "Florida",
+      boardName: "Florida Department of Health, Medical Quality Assurance",
+      verifyUrl:
+        "https://mqa-internet.doh.state.fl.us/mqasearchservices/healthcareproviders",
+    },
+    {
+      state: "Idaho",
+      boardName: "Idaho Division of Occupational & Professional Licenses",
+      verifyUrl: "https://dopl.idaho.gov/license-search/",
+    },
+    {
+      state: "South Carolina",
+      boardName:
+        "South Carolina Department of Labor, Licensing and Regulation — Board of Examiners for Licensure of Professional Counselors, Marriage and Family Therapists, Addiction Counselors and Psycho-Educational Specialists",
+      verifyUrl: "https://llr.sc.gov/cou/pub.aspx",
+    },
+  ],
+  sections: [
+    {
+      title: "Concerns and complaints",
+      body: "If you have a concern about your care, please tell me first — most things are best resolved between us.\n\nYou also have the right to contact my licensing board directly at any time, and you don't need my permission or involvement to do so. In Texas that's the Behavioral Health Executive Council; for care provided under another state's licence, contact that state's board.",
+      linkLabel: "File a complaint with the Texas Behavioral Health Executive Council",
+      linkUrl: "https://bhec.texas.gov/",
+    },
+    {
+      title: "Requesting your records",
+      body: "You have the right to a copy of your health care records.\n\nSend a written request that includes your name, date of birth, the current email or postal address you'd like the records sent to, and which records you're asking for. I'll confirm receipt and let you know the timeline.",
+    },
+  ],
+};
+
+/**
+ * Supervision & Consultation. Deliberately free of specifics she hasn't given
+ * us — no fee, no hours, no supervisee names. She fills those in; a plausible
+ * invention on a page about licensure would be worse than a blank.
+ */
+export const defaultSupervisionPage: SupervisionPage = {
+  heading: "Supervision & Consultation",
+  intro:
+    "For associates working toward licensure and for licensed clinicians who want a thinking partner. This page is for clinicians — if you're looking for therapy for yourself, the services page is the place to start.",
+  offerings: [
+    {
+      title: "Clinical supervision",
+      detail: "For LPC and LMFT associates",
+      body: "Board-required supervision toward licensure, with room for the things that don't fit neatly into a form: the cases that stay with you, the doubt that comes with early practice, and building an identity as a clinician rather than only a caseload.",
+    },
+    {
+      title: "Consultation",
+      detail: "For licensed clinicians",
+      body: "One-off or ongoing consultation on cases, clinical direction, or specific areas of practice — including perinatal mental health and working with women's issues.",
+    },
+  ],
+  superviseesHeading: "Current and former supervisees",
+  superviseesIntro:
+    "These clinicians train, or have trained, under my supervision. They practise independently and not under this practice.",
+  supervisees: [],
+  ctaHeading: "Looking for supervision or consultation?",
+  ctaBody:
+    "Tell me where you are in your licensure and what you're hoping for, and I'll let you know whether I have room.",
 };

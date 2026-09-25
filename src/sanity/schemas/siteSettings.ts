@@ -30,6 +30,7 @@ export const siteSettings = defineType({
           { title: "Terracotta — warm, bold", value: "terracotta" },
           { title: "Lavender — soft, serene", value: "lavender" },
           { title: "Teal — balanced, neutral", value: "teal" },
+          { title: "Soft teal — Austin Women's Counseling brand", value: "softteal" },
         ],
         layout: "radio",
       },

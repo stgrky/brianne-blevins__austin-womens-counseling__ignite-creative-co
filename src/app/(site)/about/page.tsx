@@ -5,7 +5,6 @@ import { Container } from "@/components/Container";
 import { Reveal } from "@/components/motion/Reveal";
 import { PortableTextRenderer } from "@/components/PortableTextRenderer";
 import { AboutSticky } from "@/components/site/AboutSticky";
-import { AssociatesGrid } from "@/components/site/AssociatesGrid";
 import { CredentialBadges } from "@/components/site/CredentialBadges";
 import { defaultAboutPage } from "@/lib/site-defaults";
 import { safeFetch } from "@/sanity/client";
@@ -93,8 +92,40 @@ export default async function AboutPageRoute() {
       {/* ── CREDENTIAL BADGES ── centred on their own, below the card ── */}
       <CredentialBadges badges={about.credentialBadges} />
 
-      {/* ── ASSOCIATES ── client-managed; hides itself when empty ── */}
-      <AssociatesGrid about={about} />
+      {/* ── ASSOCIATES ── moved to /supervision (2026-09-23): they train under
+          her supervision, they don't practise under this business. ── */}
+
+      {/* ── RATES & GOOD FAITH ESTIMATE ── the menu links straight to #rates,
+          so the id has to stay even if the heading changes. ── */}
+      {about.ratesBody ? (
+        <section id="rates" className="scroll-mt-28 bg-[var(--color-background)] py-20 md:py-28">
+          <Container>
+            <div className="mx-auto max-w-2xl">
+              <Reveal>
+                <p className="text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--color-accent-strong)]">
+                  Fees
+                </p>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <h2 className="mt-4 font-serif text-3xl leading-[1.2] text-[var(--color-foreground)] md:text-[2.4rem]">
+                  {about.ratesHeading ?? "Rates & Good Faith Estimate"}
+                </h2>
+              </Reveal>
+              <Reveal delay={0.14}>
+                <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-[var(--color-muted)]">
+                  {about.ratesBody
+                    .split(/\n{2,}/)
+                    .map((paragraph) => paragraph.trim())
+                    .filter(Boolean)
+                    .map((paragraph, i) => (
+                      <p key={i}>{paragraph}</p>
+                    ))}
+                </div>
+              </Reveal>
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       {/* ── CLOSING CTA ── */}
       <section className="bg-[var(--color-surface)] py-20 md:py-28">

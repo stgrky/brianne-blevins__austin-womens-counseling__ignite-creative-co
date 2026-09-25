@@ -1,19 +1,31 @@
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/motion/Reveal";
 import { SanityImg } from "@/components/SanityImg";
-import type { AboutPage } from "@/sanity/types";
+import type { Associate } from "@/sanity/types";
 
 /**
- * HAVEN — the associates directory. Soft pebble cards with round portraits,
+ * HAVEN — a directory of people. Soft pebble cards with round portraits,
  * matching ModalityCards' language rather than a hard "team grid."
  *
- * Client-managed: every entry comes from `aboutPage.associates`, so the
- * practice adds and removes people themselves in the Studio without touching
- * code. Section hides entirely when there's no heading or nobody listed.
+ * Takes its content as props rather than reading the About page, because these
+ * people are supervisees rather than practice staff (client's words, 2026-09-22:
+ * "my associates are not through my specific practice"), so the list lives on
+ * the Supervision & Consultation page and the wording around it has to be able
+ * to say so. Hides entirely when there's no heading or nobody listed.
  */
-export function AssociatesGrid({ about }: { about: AboutPage }) {
-  const associates = about.associates ?? [];
-  if (!about.associatesHeading || associates.length === 0) return null;
+export function AssociatesGrid({
+  heading,
+  intro,
+  people,
+  eyebrow = "The practice",
+}: {
+  heading?: string;
+  intro?: string;
+  people?: Associate[];
+  eyebrow?: string;
+}) {
+  const associates = people ?? [];
+  if (!heading || associates.length === 0) return null;
 
   return (
     <section className="bg-[var(--color-background)] py-20 md:py-28">
@@ -21,18 +33,18 @@ export function AssociatesGrid({ about }: { about: AboutPage }) {
         <div className="mx-auto max-w-2xl text-center">
           <Reveal>
             <p className="text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--color-accent-strong)]">
-              The practice
+              {eyebrow}
             </p>
           </Reveal>
           <Reveal delay={0.08}>
             <h2 className="mt-4 font-serif text-3xl leading-[1.2] text-[var(--color-foreground)] md:text-[2.4rem]">
-              {about.associatesHeading}
+              {heading}
             </h2>
           </Reveal>
-          {about.associatesIntro ? (
+          {intro ? (
             <Reveal delay={0.14}>
               <p className="mt-5 text-base leading-relaxed text-[var(--color-muted)]">
-                {about.associatesIntro}
+                {intro}
               </p>
             </Reveal>
           ) : null}

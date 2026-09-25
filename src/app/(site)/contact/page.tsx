@@ -5,7 +5,6 @@ import { Container } from "@/components/Container";
 import { ContactFormEmbed } from "@/components/ContactFormEmbed";
 import { Reveal } from "@/components/motion/Reveal";
 import { PracticeScheduler } from "@/components/PracticeScheduler";
-import { FaqSection } from "@/components/site/FaqSection";
 import { defaultContactPage } from "@/lib/site-defaults";
 import { safeFetch } from "@/sanity/client";
 import { contactPageQuery } from "@/sanity/queries";
@@ -212,8 +211,8 @@ export default async function ContactPageRoute() {
         </section>
       ) : null}
 
-      {/* ── FAQ ── bundled with SEO Setup, or scoped into revisions by CSA ── */}
-      <FaqSection heading={contact.faqHeading} faqs={contact.faqs} />
+      {/* FAQ moved to its own page (2026-09-23) so it can live under Services
+          in the menu. Same questions, same document — see /faq. */}
 
       {/* ── SOFT CROSSLINK ── */}
       <section className="bg-[var(--color-surface)] py-16 md:py-24">
