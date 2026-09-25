@@ -105,11 +105,8 @@ export interface AboutPage {
   portrait?: SanityImageWithAlt;
   credentials?: string[];
   credentialBadges?: SanityImageWithAlt[];
-  associatesHeading?: string;
-  associatesIntro?: string;
   ratesHeading?: string;
   ratesBody?: string;
-  associates?: Associate[];
 }
 
 export interface ServiceItem {

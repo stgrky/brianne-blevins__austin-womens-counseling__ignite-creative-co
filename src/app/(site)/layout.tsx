@@ -41,6 +41,7 @@ export default async function SiteLayout({
       <Header
         practiceName={settings.practiceName ?? "Therapy Practice"}
         navItems={navigation?.items}
+        cta={settings.stickyCta}
         logo={settings.logo}
       />
       <main className="flex-1">{children}</main>

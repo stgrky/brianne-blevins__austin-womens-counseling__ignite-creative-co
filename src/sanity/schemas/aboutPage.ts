@@ -48,20 +48,6 @@ export const aboutPage = defineType({
           type: "image",
           fields: [
             {
-      name: "ratesHeading",
-      title: "Rates section heading",
-      type: "string",
-      description: "Appears above your fees on the About page, linked from the menu.",
-    },
-    {
-      name: "ratesBody",
-      title: "Rates & Good Faith Estimate",
-      type: "text",
-      rows: 10,
-      description:
-        "Your session fees and your Good Faith Estimate wording. Leave blank to hide the whole section.",
-    },
-    {
               name: "alt",
               type: "string",
               title: "What the badge is",
@@ -73,61 +59,19 @@ export const aboutPage = defineType({
       ],
     }),
     defineField({
-      name: "associatesHeading",
-      title: "Associates — section heading",
+      name: "ratesHeading",
+      title: "Rates — section heading",
       type: "string",
       description:
-        "The title above your associates list, e.g. \"Associates\" or \"Who you might work with\". Leave this blank and the whole section stays hidden.",
+        'The title above your fees, e.g. "Rates & Good Faith Estimate". The menu links straight to this section.',
     }),
     defineField({
-      name: "associatesIntro",
-      title: "Associates — intro",
+      name: "ratesBody",
+      title: "Rates & Good Faith Estimate",
       type: "text",
-      rows: 2,
-      description: "Optional sentence or two above the list.",
-    }),
-    defineField({
-      name: "associates",
-      title: "Associates",
-      type: "array",
+      rows: 10,
       description:
-        "Everyone listed here appears on your About page. Press \"Add item\" to add someone new, or use the ⋮ menu on an entry to remove or reorder. Add and remove people yourself any time — nothing needs to come through us.",
-      of: [
-        {
-          type: "object",
-          name: "associate",
-          fields: [
-            {
-              name: "name",
-              type: "string",
-              title: "Name",
-              validation: (rule) => rule.required(),
-            },
-            {
-              name: "credentials",
-              type: "string",
-              title: "Credentials",
-              description: "Shown under the name, e.g. \"LPC Associate\".",
-            },
-            {
-              name: "photo",
-              type: "image",
-              title: "Headshot",
-              options: { hotspot: true },
-              fields: [{ name: "alt", type: "string", title: "Alt text" }],
-            },
-            {
-              name: "bio",
-              type: "text",
-              rows: 4,
-              title: "Bio",
-            },
-          ],
-          preview: {
-            select: { title: "name", subtitle: "credentials", media: "photo" },
-          },
-        },
-      ],
+        "Your session fees and your Good Faith Estimate wording. Leave this blank and the whole section stays hidden.",
     }),
   ],
   preview: { prepare: () => ({ title: "About Page" }) },

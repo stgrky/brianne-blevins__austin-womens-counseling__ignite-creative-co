@@ -42,6 +42,23 @@ export function Footer({ settings }: { settings: SiteSettings }) {
             </p>
           ) : null}
           {settings.addressLine ? <p>{settings.addressLine}</p> : null}
+          {(settings.socialLinks ?? []).length > 0 ? (
+            <p className="flex flex-wrap gap-x-4 gap-y-1 pt-1">
+              {(settings.socialLinks ?? []).map((link) =>
+                link.url ? (
+                  <a
+                    key={link.url}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[var(--color-foreground)]"
+                  >
+                    {link.label ?? link.url}
+                  </a>
+                ) : null,
+              )}
+            </p>
+          ) : null}
         </div>
         <div className="space-y-2 text-sm text-[var(--color-muted)]">
           <p className="font-medium text-[var(--color-foreground)]">Site</p>

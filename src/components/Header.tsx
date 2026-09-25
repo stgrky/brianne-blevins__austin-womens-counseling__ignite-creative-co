@@ -37,11 +37,13 @@ const FALLBACK_NAV: NavItem[] = [
 
 type Props = {
   practiceName: string;
+  /** The button at the end of the menu. Editable in Site Settings. */
+  cta?: { label?: string; href?: string };
   navItems?: NavItem[];
   logo?: SanityImageWithAlt;
 };
 
-export function Header({ practiceName, navItems, logo }: Props) {
+export function Header({ practiceName, cta, navItems, logo }: Props) {
   const items = navItems?.length ? navItems : FALLBACK_NAV;
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--color-subtle)]/60 bg-[var(--color-background)]/85 backdrop-blur">
@@ -67,10 +69,10 @@ export function Header({ practiceName, navItems, logo }: Props) {
         </Link>
         <NavMenu items={items} />
         <Link
-          href="/contact"
+          href={cta?.href ?? "/contact"}
           className="hidden rounded-full bg-[var(--color-accent)] px-4 py-2 text-sm text-white transition hover:bg-[var(--color-accent-strong)] md:inline-flex"
         >
-          Book a consult
+          {cta?.label ?? "Book a consult"}
         </Link>
       </Container>
       <Container className="pb-3 md:hidden">

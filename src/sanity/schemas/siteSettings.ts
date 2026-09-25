@@ -132,9 +132,9 @@ export const siteSettings = defineType({
     }),
     defineField({
       name: "stickyCta",
-      title: "Sticky CTA",
+      title: "Call-to-action button",
       description:
-        "Floating button that follows the visitor down the page after the hero. Leave blank to disable.",
+        "Used twice: the button at the end of the top menu, and the floating button that follows the visitor down the page. Leave blank to disable the floating one.",
       type: "object",
       fields: [
         { name: "label", type: "string", title: "Label" },
