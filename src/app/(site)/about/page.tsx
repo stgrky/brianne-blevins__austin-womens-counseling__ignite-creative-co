@@ -93,7 +93,7 @@ export default async function AboutPageRoute() {
       <CredentialBadges badges={about.credentialBadges} />
 
       {/* ── ASSOCIATES ── moved to /supervision (2026-09-23): they train under
-          her supervision, they don't practise under this business. ── */}
+          her supervision, they don't practice under this business. ── */}
 
       {/* ── RATES & GOOD FAITH ESTIMATE ── the menu links straight to #rates,
           so the id has to stay even if the heading changes. ── */}

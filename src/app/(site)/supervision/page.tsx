@@ -20,7 +20,7 @@ export const metadata: Metadata = {
  * Supervision & Consultation — for clinicians rather than clients.
  *
  * The supervisee directory lives here, not on About: they train under her
- * supervision, they don't practise under her business, and the page says so
+ * supervision, they don't practice under her business, and the page says so
  * plainly so neither side is misrepresented.
  */
 export default async function SupervisionPageRoute() {

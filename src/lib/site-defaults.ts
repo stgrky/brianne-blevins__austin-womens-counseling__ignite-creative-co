@@ -272,7 +272,7 @@ export const defaultSupervisionPage: SupervisionPage = {
   ],
   superviseesHeading: "Current and former supervisees",
   superviseesIntro:
-    "These clinicians train, or have trained, under my supervision. They practise independently and not under this practice.",
+    "These clinicians train, or have trained, under my supervision. They practice independently and not under this practice.",
   supervisees: [],
   ctaHeading: "Looking for supervision or consultation?",
   ctaBody:

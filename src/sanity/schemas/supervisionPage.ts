@@ -5,7 +5,7 @@ import { defineArrayMember, defineField, defineType } from "sanity";
  *
  * Kept separate from the About page because the people listed here are
  * supervisees, not members of the practice — the client was explicit that her
- * associates don't practise under her business, and a page that implied
+ * associates don't practice under her business, and a page that implied
  * otherwise would misrepresent both of them.
  */
 export const supervisionPage = defineType({
