@@ -199,17 +199,17 @@ export const defaultAnnouncement: Announcement = {
  *
  * Verification links were each checked live on 2026-09-24: Idaho's published
  * verification page 404s and South Carolina's lookup subdomain refuses outside
- * requests, so both point at the board pages that do answer. Licence numbers
+ * requests, so both point at the board pages that do answer. License numbers
  * are deliberately blank — those are hers to publish, and inventing one would
  * be worse than omitting it.
  */
 export const defaultNoticesPage: NoticesPage = {
   heading: "Notices",
   intro:
-    "Licence verification, how to raise a concern, and how to request your records. If you can't find what you need here, just ask.",
+    "License verification, how to raise a concern, and how to request your records. If you can't find what you need here, just ask.",
   licensureHeading: "Licensure & verification",
   licensureIntro:
-    "Telehealth is provided only in states where I hold a current licence. Each board below publishes a public lookup, so you can confirm any licence yourself.",
+    "Telehealth is provided only in states where I hold a current license. Each board below publishes a public lookup, so you can confirm any license yourself.",
   licensure: [
     {
       state: "Texas",
@@ -238,7 +238,7 @@ export const defaultNoticesPage: NoticesPage = {
   sections: [
     {
       title: "Concerns and complaints",
-      body: "If you have a concern about your care, please tell me first — most things are best resolved between us.\n\nYou also have the right to contact my licensing board directly at any time, and you don't need my permission or involvement to do so. In Texas that's the Behavioral Health Executive Council; for care provided under another state's licence, contact that state's board.",
+      body: "If you have a concern about your care, please tell me first — most things are best resolved between us.\n\nYou also have the right to contact my licensing board directly at any time, and you don't need my permission or involvement to do so. In Texas that's the Behavioral Health Executive Council; for care provided under another state's license, contact that state's board.",
       linkLabel: "File a complaint with the Texas Behavioral Health Executive Council",
       linkUrl: "https://bhec.texas.gov/",
     },

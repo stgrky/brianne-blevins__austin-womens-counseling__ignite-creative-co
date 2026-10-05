@@ -14,18 +14,18 @@ export const metadata: Metadata = {
 };
 
 /**
- * The page that carries what the boards require: how to verify a licence, how
+ * The page that carries what the boards require: how to verify a license, how
  * to complain, how to get your records. Dry by design — someone reading this
  * is checking a fact, not being sold to, and the fastest possible answer is
  * the courteous one.
  *
  * Every verification link goes to the state board itself rather than to a
  * screenshot or a claim, which is the whole point: the visitor confirms the
- * licence at the source.
+ * license at the source.
  */
 export default async function NoticesPageRoute() {
   const notices = await safeFetch<NoticesPage>(noticesPageQuery, {}, defaultNoticesPage);
-  const licences = notices.licensure ?? [];
+  const licenses = notices.licensure ?? [];
   const sections = notices.sections ?? [];
 
   return (
@@ -52,7 +52,7 @@ export default async function NoticesPageRoute() {
         </Container>
       </section>
 
-      {licences.length > 0 ? (
+      {licenses.length > 0 ? (
         <section className="bg-[var(--color-background)] py-16 md:py-20">
           <Container>
             <div className="max-w-2xl">
@@ -71,34 +71,34 @@ export default async function NoticesPageRoute() {
             </div>
 
             <div className="mt-10 border-t border-[var(--color-subtle)]">
-              {licences.map((licence, index) => (
-                <Reveal key={`${licence.state}-${index}`} delay={Math.min(index * 0.05, 0.2)}>
+              {licenses.map((license, index) => (
+                <Reveal key={`${license.state}-${index}`} delay={Math.min(index * 0.05, 0.2)}>
                   <div className="grid gap-2 border-b border-[var(--color-subtle)] py-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_auto] md:items-baseline md:gap-8">
                     <p className="font-serif text-lg text-[var(--color-foreground)]">
-                      {licence.state}
-                      {licence.credential ? (
-                        <span className="text-[var(--color-muted)]"> · {licence.credential}</span>
+                      {license.state}
+                      {license.credential ? (
+                        <span className="text-[var(--color-muted)]"> · {license.credential}</span>
                       ) : null}
                     </p>
                     <p className="text-[15px] leading-relaxed text-[var(--color-muted)]">
-                      {licence.boardName}
-                      {licence.licenseNumber ? (
+                      {license.boardName}
+                      {license.licenseNumber ? (
                         <>
-                          {" · Licence "}
+                          {" · License "}
                           <span className="text-[var(--color-foreground)]">
-                            {licence.licenseNumber}
+                            {license.licenseNumber}
                           </span>
                         </>
                       ) : null}
                     </p>
-                    {licence.verifyUrl ? (
+                    {license.verifyUrl ? (
                       <a
-                        href={licence.verifyUrl}
+                        href={license.verifyUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm font-semibold text-[var(--color-accent-strong)] underline decoration-[var(--color-subtle)] underline-offset-4 transition hover:decoration-[var(--color-accent)] md:justify-self-end"
                       >
-                        Verify this licence ↗
+                        Verify this license ↗
                       </a>
                     ) : null}
                   </div>

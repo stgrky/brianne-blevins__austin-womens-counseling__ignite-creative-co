@@ -9,7 +9,7 @@ import { defineArrayMember, defineField, defineType } from "sanity";
  * the same verification path. This is the one page that collects all of it, so
  * the required language is findable rather than scattered.
  *
- * Editable rather than hardcoded, because licence numbers renew, boards move
+ * Editable rather than hardcoded, because license numbers renew, boards move
  * their verification pages, and a practice adds states over time.
  */
 export const noticesPage = defineType({
@@ -43,14 +43,14 @@ export const noticesPage = defineType({
     }),
     defineField({
       name: "licensure",
-      title: "Licences",
+      title: "Licenses",
       description:
-        "One row per state you're licensed in. The verification link should point at that state's board, so anyone can confirm the licence themselves.",
+        "One row per state you're licensed in. The verification link should point at that state's board, so anyone can confirm the license themselves.",
       type: "array",
       of: [
         defineArrayMember({
           type: "object",
-          name: "licence",
+          name: "license",
           fields: [
             defineField({ name: "state", title: "State", type: "string" }),
             defineField({
@@ -61,7 +61,7 @@ export const noticesPage = defineType({
             }),
             defineField({
               name: "licenseNumber",
-              title: "Licence number",
+              title: "License number",
               description: "Leave blank if you'd rather not publish it.",
               type: "string",
             }),
@@ -73,7 +73,7 @@ export const noticesPage = defineType({
             defineField({
               name: "verifyUrl",
               title: "Verification link",
-              description: "The board's public licence lookup.",
+              description: "The board's public license lookup.",
               type: "url",
             }),
           ],
