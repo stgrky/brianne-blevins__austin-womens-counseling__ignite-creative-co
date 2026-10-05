@@ -35,7 +35,7 @@ export function PricingBlock({ home }: Props) {
             ) : null}
             {home.pricingIntro ? (
               <Reveal delay={0.16}>
-                <p className="mt-5 text-lg leading-relaxed text-[var(--color-muted)]">
+                <p className="mt-5 text-lg leading-relaxed text-[var(--color-muted)] whitespace-pre-line">
                   {home.pricingIntro}
                 </p>
               </Reveal>
@@ -50,7 +50,7 @@ export function PricingBlock({ home }: Props) {
                     <dt className="text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--color-muted)]">
                       Session fee
                     </dt>
-                    <dd className="font-serif text-xl text-[var(--color-foreground)] md:text-2xl">
+                    <dd className="font-serif text-xl text-[var(--color-foreground)] md:text-2xl whitespace-pre-line">
                       {home.sessionFee}
                     </dd>
                   </div>
@@ -62,7 +62,7 @@ export function PricingBlock({ home }: Props) {
                     <dt className="text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--color-muted)]">
                       Insurance
                     </dt>
-                    <dd className="text-base leading-relaxed text-[var(--color-foreground)]">
+                    <dd className="text-base leading-relaxed text-[var(--color-foreground)] whitespace-pre-line">
                       {home.insuranceNote}
                     </dd>
                   </div>
@@ -74,7 +74,7 @@ export function PricingBlock({ home }: Props) {
                     <dt className="text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--color-muted)]">
                       Sliding scale
                     </dt>
-                    <dd className="text-base leading-relaxed text-[var(--color-foreground)]">
+                    <dd className="text-base leading-relaxed text-[var(--color-foreground)] whitespace-pre-line">
                       {home.slidingScaleNote}
                     </dd>
                   </div>

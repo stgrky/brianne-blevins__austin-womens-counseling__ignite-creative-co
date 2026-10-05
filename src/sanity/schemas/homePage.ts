@@ -125,8 +125,10 @@ export const homePage = defineType({
     defineField({
       name: "sessionFee",
       title: "Session fee",
-      description: "e.g. '$175 per 50-min session'",
-      type: "string",
+      description:
+        "e.g. '$175 per 50-min session'. Press Enter for a new line if you list more than one fee — the line breaks show on the page.",
+      type: "text",
+      rows: 3,
     }),
     defineField({
       name: "insuranceNote",
