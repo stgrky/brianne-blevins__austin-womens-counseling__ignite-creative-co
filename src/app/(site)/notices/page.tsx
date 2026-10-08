@@ -130,14 +130,20 @@ export default async function NoticesPageRoute() {
                           ))}
                       </div>
                     ) : null}
-                    {section.linkUrl && section.linkLabel ? (
+                    {/* A URL with no label used to render nothing at all, so a
+                        link typed into the Studio simply disappeared. The label
+                        is a nicety; the link is the point. Falls back to the
+                        site's own domain, which reads better than "link here". */}
+                    {section.linkUrl ? (
                       <a
                         href={section.linkUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="mt-4 inline-block text-sm font-semibold text-[var(--color-accent-strong)] underline decoration-[var(--color-subtle)] underline-offset-4 transition hover:decoration-[var(--color-accent)]"
                       >
-                        {section.linkLabel} ↗
+                        {section.linkLabel?.trim() ||
+                          section.linkUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}{" "}
+                        ↗
                       </a>
                     ) : null}
                   </div>

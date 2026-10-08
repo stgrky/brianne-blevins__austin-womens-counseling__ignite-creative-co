@@ -213,7 +213,7 @@ export const supervisionPageQuery = groq`*[_type == "supervisionPage"][0]{
   offerings[]{ title, body, detail },
   superviseesHeading,
   superviseesIntro,
-  supervisees[]{ name, credentials, bio, photo },
+  supervisees[]{ name, credentials, bio, website, photo },
   ctaHeading,
   ctaBody
 }`;

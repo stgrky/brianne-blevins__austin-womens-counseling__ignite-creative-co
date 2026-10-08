@@ -99,6 +99,8 @@ export const noticesPage = defineType({
             defineField({
               name: "linkLabel",
               title: "Link label (optional)",
+              description:
+                "What the link should say. Leave it blank and the web address itself is shown.",
               type: "string",
             }),
             defineField({ name: "linkUrl", title: "Link (optional)", type: "url" }),

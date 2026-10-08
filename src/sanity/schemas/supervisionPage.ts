@@ -70,6 +70,13 @@ export const supervisionPage = defineType({
             }),
             defineField({ name: "bio", title: "Short bio", type: "text", rows: 4 }),
             defineField({
+              name: "website",
+              title: "Their website (optional)",
+              description:
+                "Their own practice website. Shown as a link under their bio. Alt text is read aloud to screen readers and never shown on the page, so a web address there will not appear.",
+              type: "url",
+            }),
+            defineField({
               name: "photo",
               title: "Photo",
               type: "image",

@@ -96,6 +96,8 @@ export interface Associate {
   credentials?: string;
   photo?: SanityImageWithAlt;
   bio?: string;
+  /** Their own practice site, shown as a link under the bio. */
+  website?: string;
 }
 
 export interface AboutPage {

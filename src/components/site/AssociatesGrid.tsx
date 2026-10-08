@@ -91,6 +91,18 @@ export function AssociatesGrid({
                     {person.bio}
                   </p>
                 ) : null}
+                {/* Shows the domain rather than the full address: these sit in a
+                    narrow card and a long URL wraps into something unreadable. */}
+                {person.website ? (
+                  <a
+                    href={person.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-5 text-sm font-semibold text-[var(--color-accent-strong)] underline decoration-[var(--color-subtle)] underline-offset-4 transition hover:decoration-[var(--color-accent)]"
+                  >
+                    {person.website.replace(/^https?:\/\//, "").replace(/\/$/, "")} ↗
+                  </a>
+                ) : null}
               </div>
             </Reveal>
           ))}
