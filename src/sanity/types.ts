@@ -252,6 +252,7 @@ export interface ConsultationPage {
   heading?: string;
   eyebrow?: string;
   intro?: string;
+  areas?: { title?: string; detail?: string; body?: string }[];
   body?: PortableTextBlock[];
   ctaHeading?: string;
   ctaBody?: string;

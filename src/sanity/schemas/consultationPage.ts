@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 /**
  * Consultation, split out from the Supervision page.
@@ -40,6 +40,35 @@ export const consultationPage = defineType({
       description: "A sentence or two under the heading.",
       type: "text",
       rows: 4,
+    }),
+    defineField({
+      name: "areas",
+      title: "What you consult on",
+      description:
+        'One card per area, the same way the Supervision page lists what you offer. Press "Add item" for another, and use the ⋮ menu to remove or reorder one. Leave it empty and this section stays hidden.',
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "area",
+          fields: [
+            defineField({
+              name: "title",
+              title: "Area",
+              description: 'e.g. "Perinatal mental health" or "Case consultation".',
+              type: "string",
+            }),
+            defineField({
+              name: "detail",
+              title: "Short line underneath (optional)",
+              description: 'e.g. "For clinicians new to this population".',
+              type: "string",
+            }),
+            defineField({ name: "body", title: "Description", type: "text", rows: 5 }),
+          ],
+          preview: { select: { title: "title", subtitle: "detail" } },
+        }),
+      ],
     }),
     defineField({
       name: "body",

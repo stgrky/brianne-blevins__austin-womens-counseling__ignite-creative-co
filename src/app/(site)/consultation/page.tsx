@@ -31,6 +31,8 @@ export default async function ConsultationPageRoute() {
   const page = await safeFetch<ConsultationPage | null>(consultationPageQuery, {}, null);
   if (!page) return null;
 
+  const areas = page.areas ?? [];
+
   return (
     <>
       <section className="bg-[var(--color-surface)]">
@@ -54,6 +56,34 @@ export default async function ConsultationPageRoute() {
           ) : null}
         </Container>
       </section>
+
+      {areas.length > 0 ? (
+        <section className="bg-[var(--color-background)] py-16 md:py-24">
+          <Container>
+            <div className="grid gap-8 md:grid-cols-2 lg:gap-10">
+              {areas.map((area, index) => (
+                <Reveal key={`${area.title}-${index}`} delay={0.08 * index} className="h-full">
+                  <article className="flex h-full flex-col rounded-[2.5rem] border border-[var(--color-subtle)]/50 bg-[var(--color-surface)] px-8 py-10 shadow-[var(--shadow-card)]">
+                    <h2 className="font-serif text-2xl leading-tight text-[var(--color-foreground)]">
+                      {area.title}
+                    </h2>
+                    {area.detail ? (
+                      <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--color-accent-strong)]">
+                        {area.detail}
+                      </p>
+                    ) : null}
+                    {area.body ? (
+                      <p className="mt-5 text-[15px] leading-relaxed text-[var(--color-muted)]">
+                        {area.body}
+                      </p>
+                    ) : null}
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       {page.body?.length ? (
         <section className="bg-[var(--color-background)] py-16 md:py-24">

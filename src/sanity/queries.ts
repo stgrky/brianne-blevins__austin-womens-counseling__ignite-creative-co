@@ -236,5 +236,7 @@ export const formsPageQuery = groq`*[_type == "formsPage"][0]{
 export const publishedFormCountQuery = groq`count(*[_type == "formsPage"][0].forms[defined(url)])`;
 
 export const consultationPageQuery = groq`*[_type == "consultationPage"][0]{
-  heading, eyebrow, intro, body, ctaHeading, ctaBody
+  heading, eyebrow, intro,
+  areas[]{ title, detail, body },
+  body, ctaHeading, ctaBody
 }`;
