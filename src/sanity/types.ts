@@ -222,6 +222,7 @@ export interface SupervisionPage {
   heading?: string;
   intro?: string;
   offerings?: { title?: string; body?: string; detail?: string }[];
+  body?: PortableTextBlock[];
   superviseesHeading?: string;
   superviseesIntro?: string;
   supervisees?: Associate[];
@@ -245,4 +246,13 @@ export interface FormsPage {
   intro?: string;
   forms?: { title?: string; description?: string; url?: string }[];
   footnote?: string;
+}
+
+export interface ConsultationPage {
+  heading?: string;
+  eyebrow?: string;
+  intro?: string;
+  body?: PortableTextBlock[];
+  ctaHeading?: string;
+  ctaBody?: string;
 }

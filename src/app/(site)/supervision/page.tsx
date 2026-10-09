@@ -10,14 +10,18 @@ import { supervisionPageQuery } from "@/sanity/queries";
 import type { SupervisionPage } from "@/sanity/types";
 
 export const metadata: Metadata = {
-  title: "Supervision & Consultation",
+  title: "Supervision",
   description:
-    "Clinical supervision for associates working toward licensure, and consultation for licensed clinicians.",
+    "Board-required clinical supervision for LPC and LMFT associates working toward licensure in Texas.",
   alternates: { canonical: "/supervision" },
 };
 
 /**
- * Supervision & Consultation — for clinicians rather than clients.
+ * Supervision — for associates working toward licensure.
+ *
+ * Consultation used to share this page and now has its own at /consultation,
+ * at her request: the two speak to different readers and together they were
+ * "too much info side by side".
  *
  * The supervisee directory lives here, not on About: they train under her
  * supervision, they don't practice under her business, and the page says so
@@ -42,7 +46,7 @@ export default async function SupervisionPageRoute() {
           </Reveal>
           <Reveal delay={0.08}>
             <h1 className="mt-4 font-serif text-4xl leading-[1.1] tracking-tight text-[var(--color-foreground)] md:text-[3.2rem]">
-              {page.heading ?? "Supervision & Consultation"}
+              {page.heading ?? "Supervision"}
             </h1>
           </Reveal>
           {page.intro ? (

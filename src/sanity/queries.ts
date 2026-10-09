@@ -213,6 +213,7 @@ export const supervisionPageQuery = groq`*[_type == "supervisionPage"][0]{
   offerings[]{ title, body, detail },
   superviseesHeading,
   superviseesIntro,
+  body,
   supervisees[]{ name, credentials, bio, website, photo },
   ctaHeading,
   ctaBody
@@ -233,3 +234,7 @@ export const formsPageQuery = groq`*[_type == "formsPage"][0]{
 /** Whether the Client Forms page has anything on it yet. The footer link and
  *  the page itself both hang off this, so a link never leads to an empty page. */
 export const publishedFormCountQuery = groq`count(*[_type == "formsPage"][0].forms[defined(url)])`;
+
+export const consultationPageQuery = groq`*[_type == "consultationPage"][0]{
+  heading, eyebrow, intro, body, ctaHeading, ctaBody
+}`;

@@ -10,11 +10,18 @@ import { defineArrayMember, defineField, defineType } from "sanity";
  */
 export const supervisionPage = defineType({
   name: "supervisionPage",
-  title: "Supervision & Consultation page",
+  title: "Supervision page",
   type: "document",
   fields: [
     defineField({ name: "heading", title: "Page heading", type: "string" }),
     defineField({ name: "intro", title: "Intro", type: "text", rows: 4 }),
+    defineField({
+      name: "body",
+      title: "The rest of the page",
+      description:
+        "Everything else you want to say about supervision. Use the toolbar for bold, headings and links.",
+      type: "blockContent",
+    }),
     defineField({
       name: "offerings",
       title: "What you offer",
@@ -95,5 +102,5 @@ export const supervisionPage = defineType({
     }),
     defineField({ name: "ctaBody", title: "Closing text", type: "text", rows: 3 }),
   ],
-  preview: { prepare: () => ({ title: "Supervision & Consultation" }) },
+  preview: { prepare: () => ({ title: "Supervision" }) },
 });

@@ -11,7 +11,8 @@ const SINGLETON_TITLES: Record<string, string> = {
   announcement: "Announcement Banner",
   navigation: "Menu",
   noticesPage: "Notices Page",
-  supervisionPage: "Supervision & Consultation",
+  supervisionPage: "Supervision",
+  consultationPage: "Consultation",
   formsPage: "Client Forms",
 };
 

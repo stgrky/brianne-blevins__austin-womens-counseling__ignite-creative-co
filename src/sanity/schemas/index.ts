@@ -5,6 +5,7 @@ import { announcement } from "./announcement";
 import { author } from "./author";
 import { blockContent } from "./blockContent";
 import { category } from "./category";
+import { consultationPage } from "./consultationPage";
 import { contactPage } from "./contactPage";
 import { formsPage } from "./formsPage";
 import { homePage } from "./homePage";
@@ -30,6 +31,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   contactPage,
   noticesPage,
   supervisionPage,
+  consultationPage,
   formsPage,
   navigation,
 ];
@@ -42,6 +44,7 @@ export const singletonTypes = new Set([
   "contactPage",
   "noticesPage",
   "supervisionPage",
+  "consultationPage",
   "formsPage",
   "navigation",
   "announcement",
