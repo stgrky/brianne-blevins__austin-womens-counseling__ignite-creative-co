@@ -112,14 +112,10 @@ export default async function AboutPageRoute() {
                 </h2>
               </Reveal>
               <Reveal delay={0.14}>
-                <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-[var(--color-muted)]">
-                  {about.ratesBody
-                    .split(/\n{2,}/)
-                    .map((paragraph) => paragraph.trim())
-                    .filter(Boolean)
-                    .map((paragraph, i) => (
-                      <p key={i}>{paragraph}</p>
-                    ))}
+                {/* Rich text now, so she can bold a fee or turn a web address
+                    into a link without needing anyone to do it for her. */}
+                <div className="mt-6 text-[15px] leading-relaxed text-[var(--color-muted)]">
+                  <PortableTextRenderer value={about.ratesBody} />
                 </div>
               </Reveal>
             </div>

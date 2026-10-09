@@ -68,10 +68,9 @@ export const aboutPage = defineType({
     defineField({
       name: "ratesBody",
       title: "Rates & Good Faith Estimate",
-      type: "text",
-      rows: 10,
       description:
-        "Your session fees and your Good Faith Estimate wording. Leave this blank and the whole section stays hidden.",
+        "Your session fees and your Good Faith Estimate wording. Use the toolbar to make text bold, or to turn a web address into a link. Leave this blank and the whole section stays hidden.",
+      type: "blockContent",
     }),
   ],
   preview: { prepare: () => ({ title: "About Page" }) },

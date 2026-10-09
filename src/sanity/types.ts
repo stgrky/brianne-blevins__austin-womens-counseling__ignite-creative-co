@@ -108,7 +108,7 @@ export interface AboutPage {
   credentials?: string[];
   credentialBadges?: SanityImageWithAlt[];
   ratesHeading?: string;
-  ratesBody?: string;
+  ratesBody?: PortableTextBlock[];
 }
 
 export interface ServiceItem {
