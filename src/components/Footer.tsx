@@ -4,7 +4,14 @@ import type { SiteSettings } from "@/sanity/types";
 
 import { Container } from "./Container";
 
-export function Footer({ settings }: { settings: SiteSettings }) {
+export function Footer({
+  settings,
+  showForms = false,
+}: {
+  settings: SiteSettings;
+  /** False until a form with a link exists, which hides the Client forms link. */
+  showForms?: boolean;
+}) {
   const year = new Date().getFullYear();
   return (
     <footer className="mt-24 border-t border-[var(--color-subtle)]/60 bg-[var(--color-surface)]">
@@ -75,6 +82,15 @@ export function Footer({ settings }: { settings: SiteSettings }) {
               Services
             </Link>
           </p>
+          {/* Appears once she has added a form. A link to a page with nothing
+              on it is worse than no link. */}
+          {showForms ? (
+            <p>
+              <Link href="/forms" className="hover:text-[var(--color-foreground)]">
+                Client forms
+              </Link>
+            </p>
+          ) : null}
           <p>
             <Link href="/notices" className="hover:text-[var(--color-foreground)]">
               Notices

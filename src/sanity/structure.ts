@@ -12,6 +12,7 @@ const SINGLETON_TITLES: Record<string, string> = {
   navigation: "Menu",
   noticesPage: "Notices Page",
   supervisionPage: "Supervision & Consultation",
+  formsPage: "Client Forms",
 };
 
 export const structure: StructureResolver = (S) =>

@@ -221,3 +221,15 @@ export const supervisionPageQuery = groq`*[_type == "supervisionPage"][0]{
 export const navigationQuery = groq`*[_type == "navigation"][0]{
   items[]{ label, href, children[]{ label, href } }
 }`;
+
+export const formsPageQuery = groq`*[_type == "formsPage"][0]{
+  heading,
+  notice,
+  intro,
+  forms[]{ title, description, url },
+  footnote
+}`;
+
+/** Whether the Client Forms page has anything on it yet. The footer link and
+ *  the page itself both hang off this, so a link never leads to an empty page. */
+export const publishedFormCountQuery = groq`count(*[_type == "formsPage"][0].forms[defined(url)])`;

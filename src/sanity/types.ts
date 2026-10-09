@@ -238,3 +238,11 @@ export interface NavItem {
 export interface Navigation {
   items?: NavItem[];
 }
+
+export interface FormsPage {
+  heading?: string;
+  notice?: string;
+  intro?: string;
+  forms?: { title?: string; description?: string; url?: string }[];
+  footnote?: string;
+}
