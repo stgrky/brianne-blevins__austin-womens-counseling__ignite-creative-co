@@ -31,6 +31,10 @@ export function StickyAbout({ home }: Props) {
     reduceMotion ? ["0%", "0%"] : ["8%", "-8%"]
   );
 
+  const hasImage = Boolean(
+    home.aboutTeaserImage?.asset || home.aboutTeaserImage?.demoUrl
+  );
+
   return (
     <section
       id="about"
@@ -38,7 +42,7 @@ export function StickyAbout({ home }: Props) {
       className="relative bg-[var(--color-background)] py-24 md:py-32"
     >
       <Container className="grid gap-12 md:grid-cols-12 md:items-start">
-        <div className="md:col-span-5">
+        <div className={hasImage ? "md:col-span-5" : "md:col-span-8"}>
           <div className="md:sticky md:top-28">
             <Reveal>
               <p className="text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--color-accent-strong)]">
@@ -71,23 +75,29 @@ export function StickyAbout({ home }: Props) {
           </div>
         </div>
 
-        <div className="md:col-span-7">
-          <motion.div
-            style={{ y }}
-            className="overflow-hidden rounded-2xl shadow-[var(--shadow-card)]"
-          >
-            <SanityImg
-              image={home.aboutTeaserImage}
-              alt={
-                home.aboutTeaserImage?.alt ?? home.aboutTeaserHeading ?? ""
-              }
-              width={1100}
-              height={1400}
-              className="aspect-[5/6] w-full object-cover md:aspect-[4/5]"
-              sizes="(min-width: 768px) 55vw, 100vw"
-            />
-          </motion.div>
-        </div>
+        {/* No image, no column. Removing a photo in Studio leaves the
+            field behind without its asset, which used to render an empty
+            grey panel captioned "Image" — so deleting a picture you did not
+            want produced a placeholder you wanted even less. */}
+        {hasImage ? (
+          <div className="md:col-span-7">
+            <motion.div
+              style={{ y }}
+              className="overflow-hidden rounded-2xl shadow-[var(--shadow-card)]"
+            >
+              <SanityImg
+                image={home.aboutTeaserImage}
+                alt={
+                  home.aboutTeaserImage?.alt ?? home.aboutTeaserHeading ?? ""
+                }
+                width={1100}
+                height={1400}
+                className="aspect-[5/6] w-full object-cover md:aspect-[4/5]"
+                sizes="(min-width: 768px) 55vw, 100vw"
+              />
+            </motion.div>
+          </div>
+        ) : null}
       </Container>
     </section>
   );

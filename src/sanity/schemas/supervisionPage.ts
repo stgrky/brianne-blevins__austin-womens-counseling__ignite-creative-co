@@ -23,6 +23,20 @@ export const supervisionPage = defineType({
       type: "blockContent",
     }),
     defineField({
+      name: "nextStepsHeading",
+      title: "Next steps — heading",
+      description:
+        "Optional. Leave empty and the whole Next steps box stays off the page.",
+      type: "string",
+    }),
+    defineField({
+      name: "nextSteps",
+      title: "Next steps — content",
+      description:
+        "Shown in a highlighted box. Use the toolbar's link button to turn your email address into a clickable link: select the text, click the link button, and enter mailto:you@example.com",
+      type: "blockContent",
+    }),
+    defineField({
       name: "offerings",
       title: "What you offer",
       description: "Supervision, consultation, anything else — one block each.",

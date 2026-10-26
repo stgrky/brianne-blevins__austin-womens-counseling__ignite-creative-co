@@ -210,6 +210,8 @@ export const noticesPageQuery = groq`*[_type == "noticesPage"][0]{
 export const supervisionPageQuery = groq`*[_type == "supervisionPage"][0]{
   heading,
   intro,
+  nextStepsHeading,
+  nextSteps,
   offerings[]{ title, body, detail },
   superviseesHeading,
   superviseesIntro,

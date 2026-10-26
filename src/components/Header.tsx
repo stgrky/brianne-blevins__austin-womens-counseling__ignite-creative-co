@@ -60,7 +60,8 @@ export function Header({ practiceName, cta, navItems, logo }: Props) {
               width={320}
               height={80}
               className="h-9 w-auto object-contain md:h-10"
-            />
+              fit="max"
+              />
           ) : (
             <span className="font-serif text-xl tracking-tight">
               {practiceName}

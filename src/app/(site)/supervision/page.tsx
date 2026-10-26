@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
+import { PortableTextRenderer } from "@/components/PortableTextRenderer";
 import { Reveal } from "@/components/motion/Reveal";
 import { AssociatesGrid } from "@/components/site/AssociatesGrid";
 import { defaultSupervisionPage } from "@/lib/site-defaults";
@@ -59,6 +60,18 @@ export default async function SupervisionPageRoute() {
         </Container>
       </section>
 
+      {page.body?.length ? (
+        <section className="bg-[var(--color-background)] py-16 md:py-24">
+          <Container>
+            <Reveal>
+              <article className="prose-serif mx-auto max-w-2xl text-lg text-[var(--color-foreground)]">
+                <PortableTextRenderer value={page.body} />
+              </article>
+            </Reveal>
+          </Container>
+        </section>
+      ) : null}
+
       {offerings.length > 0 ? (
         <section className="bg-[var(--color-background)] py-16 md:py-24">
           <Container>
@@ -83,6 +96,27 @@ export default async function SupervisionPageRoute() {
                 </Reveal>
               ))}
             </div>
+          </Container>
+        </section>
+      ) : null}
+
+      {page.nextStepsHeading || page.nextSteps?.length ? (
+        <section className="bg-[var(--color-background)] pb-16 md:pb-24">
+          <Container>
+            <Reveal>
+              <div className="mx-auto max-w-2xl rounded-2xl border border-[var(--color-accent)]/25 bg-[var(--color-accent-soft)] p-8 md:p-10">
+                {page.nextStepsHeading ? (
+                  <h2 className="font-serif text-2xl text-[var(--color-foreground)]">
+                    {page.nextStepsHeading}
+                  </h2>
+                ) : null}
+                {page.nextSteps?.length ? (
+                  <div className="prose-serif mt-4 text-[var(--color-foreground)]">
+                    <PortableTextRenderer value={page.nextSteps} />
+                  </div>
+                ) : null}
+              </div>
+            </Reveal>
           </Container>
         </section>
       ) : null}

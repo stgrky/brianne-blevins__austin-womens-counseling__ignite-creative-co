@@ -223,6 +223,8 @@ export interface SupervisionPage {
   intro?: string;
   offerings?: { title?: string; body?: string; detail?: string }[];
   body?: PortableTextBlock[];
+  nextStepsHeading?: string;
+  nextSteps?: PortableTextBlock[];
   superviseesHeading?: string;
   superviseesIntro?: string;
   supervisees?: Associate[];
