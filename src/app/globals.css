@@ -148,7 +148,7 @@ body {
  * short text field — must not be able to push a card wider than the phone
  * it is being read on. */
 body {
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .prose-serif h2,

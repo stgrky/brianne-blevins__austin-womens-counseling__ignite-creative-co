@@ -75,7 +75,7 @@ export default async function SupervisionPageRoute() {
       {offerings.length > 0 ? (
         <section className="bg-[var(--color-background)] py-16 md:py-24">
           <Container>
-            <div className="grid gap-8 md:grid-cols-2 lg:gap-10">
+            <div className="grid gap-8 md:grid-cols-2 lg:gap-10 [&>*]:min-w-0">
               {offerings.map((offering, index) => (
                 <Reveal key={`${offering.title}-${index}`} delay={0.08 * index} className="h-full">
                   <article className="flex h-full flex-col rounded-[2.5rem] border border-[var(--color-subtle)]/50 bg-[var(--color-surface)] px-8 py-10 shadow-[var(--shadow-card)]">
