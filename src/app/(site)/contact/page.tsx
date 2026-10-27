@@ -52,6 +52,32 @@ export default async function ContactPageRoute() {
         </Container>
       </section>
 
+      {/* ── CONTACT FORM ── first, by the client's preference: a message
+          tells her what someone is coming for before a time is booked. ── */}
+      {contact.formEmbedUrl ? (
+        <section className="bg-[var(--color-surface)] py-16 md:py-24">
+          <Container>
+            <div className="mx-auto max-w-2xl">
+              <Reveal>
+                <p className="text-center text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--color-accent-strong)]">
+                  Start here
+                </p>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <h2 className="mt-4 text-center font-serif text-3xl leading-[1.15] text-[var(--color-foreground)] md:text-[2.2rem]">
+                  Write when you&apos;re ready.
+                </h2>
+              </Reveal>
+              <Reveal delay={0.16}>
+                <div className="mt-10">
+                  <ContactFormEmbed url={contact.formEmbedUrl} />
+                </div>
+              </Reveal>
+            </div>
+          </Container>
+        </section>
+      ) : null}
+
       {/* ── SCHEDULER (if configured) ── */}
       {hasScheduler ? (
         <section className="bg-[var(--color-background)] py-16 md:py-20">
@@ -63,11 +89,6 @@ export default async function ContactPageRoute() {
             </Reveal>
             <Reveal delay={0.1}>
               <PracticeScheduler url={contact.schedulingUrl!} />
-            </Reveal>
-            <Reveal delay={0.2}>
-              <p className="mx-auto mt-6 max-w-md text-center text-sm text-[var(--color-muted)]">
-                Prefer to talk first? Email or call — details just below.
-              </p>
             </Reveal>
           </Container>
         </section>
@@ -86,7 +107,7 @@ export default async function ContactPageRoute() {
               </Reveal>
               <Reveal delay={0.08}>
                 <h2 className="mt-4 font-serif text-3xl leading-[1.15] text-[var(--color-foreground)] md:text-[2.2rem]">
-                  Three ways to start a conversation.
+                  Or reach me directly.
                 </h2>
               </Reveal>
 
@@ -186,51 +207,9 @@ export default async function ContactPageRoute() {
       </section>
       ) : null}
 
-      {/* ── CONTACT FORM ── the practice's own existing form, embedded ── */}
-      {contact.formEmbedUrl ? (
-        <section className="bg-[var(--color-surface)] py-16 md:py-24">
-          <Container>
-            <div className="mx-auto max-w-2xl">
-              <Reveal>
-                <p className="text-center text-[11px] font-medium tracking-[0.22em] uppercase text-[var(--color-accent-strong)]">
-                  Or send a message
-                </p>
-              </Reveal>
-              <Reveal delay={0.08}>
-                <h2 className="mt-4 text-center font-serif text-3xl leading-[1.15] text-[var(--color-foreground)] md:text-[2.2rem]">
-                  Write when you&apos;re ready.
-                </h2>
-              </Reveal>
-              <Reveal delay={0.16}>
-                <div className="mt-10">
-                  <ContactFormEmbed url={contact.formEmbedUrl} />
-                </div>
-              </Reveal>
-            </div>
-          </Container>
-        </section>
-      ) : null}
-
       {/* FAQ moved to its own page (2026-09-23) so it can live under Services
           in the menu. Same questions, same document — see /faq. */}
 
-      {/* ── SOFT CROSSLINK ── */}
-      <section className="bg-[var(--color-surface)] py-16 md:py-24">
-        <Container className="text-center">
-          <Reveal>
-            <p className="mx-auto max-w-xl text-base leading-relaxed text-[var(--color-muted)]">
-              Not sure what happens after you reach out?{" "}
-              <Link
-                href="/#about"
-                className="font-medium text-[var(--color-accent-strong)] underline underline-offset-4 hover:text-[var(--color-foreground)]"
-              >
-                Walk through what to expect
-              </Link>
-              .
-            </p>
-          </Reveal>
-        </Container>
-      </section>
     </>
   );
 }

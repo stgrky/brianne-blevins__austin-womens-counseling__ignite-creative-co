@@ -129,9 +129,26 @@ body {
   font-family: var(--font-body);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Inside @layer base, not unlayered.
+ *
+ * Unlayered declarations outrank everything in @layer utilities, so this
+ * rule was quietly beating every text-colour utility applied to a link.
+ * The header's "Free 15-minute consultation" button is an <a> carrying
+ * `text-white`; that class did nothing, the link inherited dark body text,
+ * and the result was white-looking-dark type on teal at 2.95:1 — below the
+ * 4.5:1 AA minimum, on the primary call to action of every page. */
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+/* Long unbroken strings — an email address or a pasted URL typed into a
+ * short text field — must not be able to push a card wider than the phone
+ * it is being read on. */
+body {
+  overflow-wrap: break-word;
 }
 
 .prose-serif h2,
