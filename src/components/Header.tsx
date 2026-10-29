@@ -59,7 +59,7 @@ export function Header({ practiceName, cta, navItems, logo }: Props) {
               alt={logo.alt ?? practiceName}
               width={320}
               height={80}
-              className="h-9 w-auto object-contain md:h-10"
+              className="h-12 w-auto object-contain md:h-16"
               fit="max"
               />
           ) : (
