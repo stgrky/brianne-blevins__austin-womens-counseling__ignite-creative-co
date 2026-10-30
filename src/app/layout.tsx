@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { SITE_URL } from "@/lib/site";
 import {
   Cormorant_Garamond,
   Fraunces,
@@ -95,6 +97,10 @@ export async function generateMetadata(): Promise<Metadata> {
     : null;
 
   return {
+    // Without this, Next resolves Open Graph and canonical URLs against
+    // localhost, so every link she or anyone else shares previews as a broken
+    // card. It has to be the www host, which is the one that answers.
+    metadataBase: new URL(SITE_URL),
     title: {
       default: practiceName,
       template: `%s · ${practiceName}`,
