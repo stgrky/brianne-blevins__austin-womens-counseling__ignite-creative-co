@@ -44,6 +44,23 @@ const nextConfig: NextConfig = {
   // need nothing.
   async redirects() {
     return [
+      // Apex to www.
+      //
+      // www is the canonical host and has been since before this build: the
+      // apex already 302s there on her Google Sites setup, so www is what is
+      // linked to and what search engines hold. Both hostnames are attached
+      // to the Vercel project, so without this they would serve the same
+      // pages at two addresses and split her ranking.
+      //
+      // The host pattern is anchored so it cannot also match
+      // www.austinwomenscounseling.com. If it did, www would redirect to
+      // itself forever and the site would be down.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "^austinwomenscounseling\\.com$" }],
+        destination: "https://www.austinwomenscounseling.com/:path*",
+        permanent: true,
+      },
       { source: "/home", destination: "/", permanent: true },
       { source: "/services-offered", destination: "/services", permanent: true },
       { source: "/forms-fees", destination: "/about#rates", permanent: true },
