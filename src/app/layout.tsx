@@ -112,6 +112,9 @@ export async function generateMetadata(): Promise<Metadata> {
     // Next fills the title and description in per page from the values above;
     // the picture comes from `opengraph-image.tsx` beside this file.
     openGraph: { siteName: practiceName, type: "website", locale: "en_US" },
+    // Next emits `twitter:image` from the same card, but X shows it as a
+    // small square unless the card type says otherwise.
+    twitter: { card: "summary_large_image" },
     icons: faviconUrl
       ? {
           icon: [{ url: faviconUrl, sizes: "any" }],
