@@ -106,6 +106,12 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s · ${practiceName}`,
     },
     description,
+    // Without this there is no `og:title`, `og:description` or `og:site_name`
+    // on any page — `title` and `description` alone only produce the browser
+    // tab and the search snippet, so a pasted link previewed as an empty box.
+    // Next fills the title and description in per page from the values above;
+    // the picture comes from `opengraph-image.tsx` beside this file.
+    openGraph: { siteName: practiceName, type: "website", locale: "en_US" },
     icons: faviconUrl
       ? {
           icon: [{ url: faviconUrl, sizes: "any" }],
