@@ -111,7 +111,29 @@ export async function generateMetadata(): Promise<Metadata> {
     // tab and the search snippet, so a pasted link previewed as an empty box.
     // Next fills the title and description in per page from the values above;
     // the picture comes from `opengraph-image.tsx` beside this file.
-    openGraph: { siteName: practiceName, type: "website", locale: "en_US" },
+    // `./` resolves against metadataBase per route, so every page declares
+    // its own canonical rather than all of them claiming the home page.
+    alternates: { canonical: "./" },
+    openGraph: {
+      siteName: practiceName,
+      type: "website",
+      locale: "en_US",
+      // `og:url` was missing, and that is what kept her preview blank on
+      // Facebook long after the card itself was live and correct.
+      //
+      // Facebook stores one cached object per URL STRING, not per site. She
+      // shares the bare `www.austinwomenscounseling.com` — her email
+      // signature writes it that way — which Facebook resolves to
+      // `http://www…`, a different key from `https://www…`, and the apex is
+      // a third. Without `og:url` there is nothing telling Facebook those
+      // are one page, so a scrape of one variant never clears the others,
+      // and the blank one captured before the card existed kept coming
+      // back on every new post.
+      //
+      // With `og:url` present, Facebook treats the canonical address as the
+      // object id and every variant resolves to the same, correct card.
+      url: "./",
+    },
     // Next emits `twitter:image` from the same card, but X shows it as a
     // small square unless the card type says otherwise.
     twitter: { card: "summary_large_image" },
